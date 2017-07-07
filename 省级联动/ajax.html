@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+	<select name="" id="left_sel">
+		<option value="">请选择</option>
+	</select>
+	<select name="" id="right_sel">
+		<option value="">请选择</option>
+	</select>
+</body>
+<script>
+    //1、创建请求对象
+    var xhr;
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        var versions = ["Msxml2.XMLHTTP", "Microsoft.XMLHTTP"];
+        for (var tempVersion of versions) {
+            xhr = new ActiveXObject(tempVersion);
+            if (xhr != undefined) {
+                break;
+            }
+        }
+    } else {
+        //主动抛出异常
+        throw new Error("该浏览器不支持ajax！");
+    }
+
+    //2、建立链接
+    xhr.open("GET", "city.json", true);
+
+    //3、发送请求
+    xhr.send(null);
+
+    //4、接收响应
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+//					console.log(xhr.responseText);
+            //反序列化转换成JS字面量对象
+            var rootObj = JSON.parse(xhr.responseText);
+//          console.log(rootObj);
+
+			//取左右元素
+			var leftSel = document.getElementById("left_sel");
+			var rightSel = document.getElementById("right_sel");
+			//添加左边省级城市
+			for(var tempProvince of rootObj.cityData){
+				//创建option
+				var  option = document.createElement("option");
+				option.innerHTML = tempProvince.province;
+				leftSel.appendChild(option);
+			}
+			
+			//添加右边市
+			leftSel.onfocus = function(){
+				for(var i=1;i<rightSel.options.length;i++){
+					rightSel.removeChild(rightSel.options[1]);
+					i--;
+				}
+				for(var tempProvince of rootObj.cityData){
+					if(tempProvince.province == this.value){
+						for(var tempCitys of tempProvince.city){
+							var option = document.createElement("option");
+							option.innerHTML = tempCitys.cityName;
+							rightSel.appendChild(option);
+						}
+					}
+				}
+			}
+            
+        }
+    }
+
+</script>
+</html>

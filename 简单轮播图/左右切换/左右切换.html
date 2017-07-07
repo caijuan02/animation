@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background: #999;
+        }
+        #wrap{
+            width: 700px;
+            height: 500px;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+        }
+        #wrap #ul-img{
+            list-style: none;
+            width: 4200px;
+            position: absolute;
+        }
+        #wrap #ul-img li{
+            width: 700px;
+            height: 500px;
+            float: left;
+        }
+        img{
+            width: 700px;
+            height: 500px;
+        }
+        #wrap > i{
+            width: 60px;
+            height: 60px;
+            z-index: 1000;
+            top: 50%;
+            margin-top: -30px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity : 0);
+        }
+        #previous{
+            background: url("../img/btn.gif") no-repeat 0 0;
+            position: absolute;
+            left: 10px;
+            z-index: 1000;
+        }
+        #next{
+            background: url("../img/btn.gif") no-repeat 0 -60px;
+            position: absolute;
+            right: 10px;
+            z-index: 1000;
+        }
+        #wrap #ul-circle{
+            width: 210px;
+            list-style:none;
+            position: absolute;
+            bottom: 10px;
+            left: 245px;
+            z-index: 100;
+        }
+        #wrap #ul-circle > li{
+            float: left;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        #wrap #ul-circle > li > div{
+            width: 10px;
+            height: 10px;
+            border: 5px solid pink;
+            padding: 5px;
+            background: #fff;
+            border-radius: 50%;
+        }
+        .clearFix::after{
+            display: block;
+            content: "";
+            clear: both;
+        }
+        #left{
+            width: 350px;
+            height: 500px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #right{
+            width: 350px;
+            height: 500px;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="wrap">
+        <ul class="clearFix" id="ul-img">
+            <li><img src="../img/l7.jpg" alt=""/></li>
+            <li><img src="../img/l28.jpg" alt=""/></li>
+            <li><img src="../img/l37.jpeg" alt=""/></li>
+            <li><img src="../img/l47.jpg" alt=""/></li>
+            <li><img src="../img/l50.jpg" alt=""/></li>
+            <li><img src="../img/l52.jpg" alt=""/></li>
+        </ul>
+        <i id="previous"></i>
+        <i id="next"></i>
+        <a href="###" id="left"></a>
+        <a href="###" id="right"></a>
+        <ul class="clearFix" id="ul-circle">
+            <li><div></div></li>
+            <li><div></div></li>
+            <li><div></div></li>
+            <li><div></div></li>
+            <li><div></div></li>
+            <li><div></div></li>
+        </ul>
+    </div>
+
+
+    <script src="js/hcmove.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

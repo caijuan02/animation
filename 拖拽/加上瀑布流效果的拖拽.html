@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+			            padding: 0;
+			            margin: 0;
+			        }
+			        #cont{
+			            width: 1084px;
+			            margin: 0 auto;
+			        }
+			        #cont > div{
+			            width: 500px;
+			            height: 2000px;
+			            border: 1px solid pink;
+			            margin: 10px 20px;
+			            float: left;
+			        }
+			        img{
+			            width: 150px;
+			            transition: all 0.2s;
+			        }
+		</style>
+	</head>
+
+	<body>
+
+		<div id="cont">
+			<div id="left">
+				<img src="img/10.jpg">
+				<img src="img/c3.jpg">
+				<img src="img/l12.jpeg">
+				<img src="img/c7.jpg">
+				<img src="img/1.gif">
+				<img src="img/7.gif">
+				<img src="img/l50.jpg">
+				<img src="img/c10.jpeg">
+				<img src="img/c13.jpg">
+				<img src="img/9.jpeg">
+				<img src="img/4.gif">
+				<img src="img/c17.jpg">
+				<img src="img/f10.jpeg">
+				<img src="img/5.jpeg">
+				<img src="img/8.jpeg">
+				<img src="img/c25.jpg">
+				<img src="img/f2.jpg">
+				<img src="img/f3.jpg">
+				<img src="img/l45.jpg">
+				<img src="img/f17.jpg">
+				<img src="img/2.jpeg">
+				<img src="img/c1.jpg">
+				<img src="img/f6.jpg">
+				<img src="img/l8.jpeg">
+				<img src="img/6.jpg">
+				<img src="img/l11.jpg">
+			</div>
+			<div id="right"></div>
+		</div>
+
+		<script src="Masonry.js"></script>
+		<script>
+			var cont = document.getElementById('cont');
+			var left = document.getElementById('left');
+			var right = document.getElementById('right');
+			//实现拖拽   绑定事件
+			//在开始拖拽时 记录鼠标拖拽的图片
+			var img;
+			//实例化一个对象
+			var m = new Masonry(right, {
+				cols: 3,
+				imgWidth: 150
+					//                imgMargin: 10
+			});
+			left.ondragstart = function(eve) {
+				var e = eve || window.event;
+				img = e.target || e.srcElement;
+			};
+			//拖拽经过右边div时 阻止默认事件  使浏览器允许自由拖拽元素
+			right.ondragover = function(eve) {
+				var e = eve || window.event;
+				e.preventDefault();
+			};
+			//将鼠标拖拽的图片加到右边容器
+			right.ondrop = function(eve) {
+				//用对象的方法
+				var e = eve || window.event;
+				m.appendImg(img,e);
+				img = null;
+			};
+		</script>
+	</body>
+
+</html>

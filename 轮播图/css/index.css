@@ -1,0 +1,111 @@
+
+ul {
+    list-style: none;
+}
+#container{
+    width: 400px;
+    height: 435px;
+    margin: 50px auto;
+    background-color: rgba(0,0,0,0.4);
+}
+#big{
+    width: 400px;
+    height: 320px;
+    position: relative;
+}
+#big .img{
+    width: 400px;
+    height: 0;
+    position: absolute;
+}
+#big .img1{
+    width: 400px;
+    height: 320px;
+}
+#big li{
+    /*position: absolute;*/
+}
+
+#big #ileft{
+    width: 60px;
+    height: 60px;
+    background: url("../images/btn.gif") no-repeat 0 0 ;
+    position: absolute;
+    top: 118px;
+    left: 10px;
+    z-index: 999;
+    opacity: 0;
+    filter:alpha(opacity:0);
+}
+#big #iright{
+    width: 60px;
+    height: 63px;
+    background: url("../images/btn.gif") no-repeat 0 -60px ;
+    position: absolute;
+    top: 118px;
+    right: 10px;
+    z-index: 999;
+    opacity: 0;
+    filter:alpha(opacity:0);
+}
+#big #aleft{
+    width: 200px;
+    height: 320px;
+    position: absolute;
+    z-index: 998;
+
+}
+#big #aright{
+    width: 200px;
+    height: 320px;
+    position: absolute;
+    right: 0;
+    z-index: 998;
+
+}
+#big #bgline{
+    width: 400px;
+    height: 50px;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    bottom: 0;
+}
+#big #text1{
+    position: absolute;
+    bottom: 15px;
+    left: 10px;
+    z-index: 999;
+
+}
+#big #text2{
+    position: absolute;
+    bottom: 15px;
+    right: 10px;
+    z-index: 999;
+}
+
+#small{
+    position: relative;
+    width: 380px;
+    overflow: hidden;
+    height: 100px;
+}
+#small ul{
+    position : absolute;
+    height:100px;
+    /*width:400px;*/
+    left:0;
+}
+#small ul li {
+    float: left;
+    width:120px;
+    height:100px;
+    padding:10px 6px;
+    cursor: pointer;
+    opacity:0.5;
+    filter:alpha(opacity:50);
+}
+#small ul li img{
+    width: 120px;
+
+}

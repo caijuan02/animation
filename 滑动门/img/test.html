@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <input type="button" value="1">
+    <input type="button" value="2">
+    <input type="button" value="3">
+    <input type="button" value="4">
+    <input type="button" value="5">
+</div>
+
+
+<script>
+    var input = document.getElementsByTagName('input');
+    console.log(input);
+    /*for(var i=0;i<input.length;i++){
+     input[i].onclick = function(num){
+     return function fn1(){
+     alert(num+1);
+     }
+     }(i)
+     }*/
+
+    for (var i = 0; i < input.length; i++) {
+        input[i].index = i + 1;
+        input[i].onclick = function () {
+            alert(this.index);
+        }
+    }
+
+</script>
+</body>
+</html>

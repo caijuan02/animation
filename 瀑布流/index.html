@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            width: 200px;
+            margin: 0 auto;
+            list-style: none;
+            position: relative;
+        }
+
+        ul li {
+            width: 200px;
+            padding: 5px;
+            border: 1px solid gray;
+            position: absolute;
+        }
+        ul li img {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<ul id="ul-list">
+    <li><img src="img/10.jpg" alt=""/><a href="#">图片1</a></li>
+    <li><img src="img/c3.jpg" alt=""/><a href="#">图片2</a></li>
+    <li><img src="img/l12.jpeg" alt=""/><a href="#">图片3</a></li>
+    <li><img src="img/c7.jpg" alt=""/><a href="#">图片4</a></li>
+    <li><img src="img/1.gif" alt=""/><a href="#">图片5</a></li>
+    <li><img src="img/7.gif" alt=""/><a href="#">图片6</a></li>
+    <li><img src="img/l50.jpg" alt=""/><a href="#">图片7</a></li>
+    <li><img src="img/c10.jpeg" alt=""/><a href="#">图片8</a></li>
+    <li><img src="img/c13.jpg" alt=""/><a href="#">图片9</a></li>
+    <li><img src="img/9.jpeg" alt=""/><a href="#">图片10</a></li>
+    <li><img src="img/4.gif" alt=""/><a href="#">图片11</a></li>
+    <li><img src="img/c17.jpg" alt=""/><a href="#">图片12</a></li>
+    <li><img src="img/f10.jpeg" alt=""/><a href="#">图片13</a></li>
+    <li><img src="img/5.jpeg" alt=""/><a href="#">图片14</a></li>
+    <li><img src="img/8.jpeg" alt=""/><a href="#">图片15</a></li>
+    <li><img src="img/c25.jpg" alt=""/><a href="#">图片16</a></li>
+    <li><img src="img/f2.jpg" alt=""/><a href="#">图片17</a></li>
+    <li><img src="img/f3.jpg" alt=""/><a href="#">图片18</a></li>
+    <li><img src="img/l45.jpg" alt=""/><a href="#">图片19</a></li>
+    <li><img src="img/f17.jpg" alt=""/><a href="#">图片20</a></li>
+    <li><img src="img/2.jpeg" alt=""/><a href="#">图片21</a></li>
+    <li><img src="img/c1.jpg" alt=""/><a href="#">图片22</a></li>
+    <li><img src="img/f6.jpg" alt=""/><a href="#">图片23</a></li>
+    <li><img src="img/l8.jpeg" alt=""/><a href="#">图片24</a></li>
+    <li><img src="img/6.jpg" alt=""/><a href="#">图片25</a></li>
+    <li><img src="img/l11.jpg" alt=""/><a href="#">图片26</a></li>
+</ul>
+
+
+<script>
+    var pics = {
+        "data":[
+            {"src" : "l11.jpg","info": "图片"},
+            {"src" : "f6.jpg","info": "图片"},
+            {"src" : "f17.jpg","info": "图片"},
+            {"src" : "6.jpg","info": "图片"},
+            {"src" : "c25.jpg","info": "图片"},
+            {"src" : "9.jpeg","info": "图片"},
+            {"src" : "l8.jpeg","info": "图片"},
+            {"src" : "c1.jpg","info": "图片"},
+            {"src" : "2.jpeg","info": "图片"},
+            {"src" : "l45.jpg","info": "图片"},
+            {"src" : "f3.jpg","info": "图片"},
+            {"src" : "f2.jpg","info": "图片"},
+            {"src" : "8.jpeg","info": "图片"},
+            {"src" : "5.jpeg","info": "图片"},
+            {"src" : "f10.jpeg","info": "图片"},
+            {"src" : "4.gif","info": "图片"},
+            {"src" : "c13.jpg","info": "图片"},
+            {"src" : "c10.jpeg","info": "图片"},
+            {"src" : "l50.jpg","info": "图片"},
+            {"src" : "7.gif","info": "图片"},
+            {"src" : "1.gif","info": "图片"},
+            {"src" : "10.jpg","info": "图片"},
+            {"src" : "c3.jpg","info": "图片"},
+            {"src" : "l12.jpeg","info": "图片"}
+        ]
+    };
+    function flow(ot,ov) { //ot表示距上面图片的距离 ov表示距右边图片的距离
+        //计算页面的宽度，计算出页面可放数据块的列数(如上图所示就有6列)
+        //将各个数据块的高度尺寸记入数组中(需要等所有图片加载完成，否则无法知道图片的高度)
+        //用绝对定位先将页面第一行填满，因为第一行的top位置都是一样的，然后用数组记录每一列的总高度。
+        //继续用绝对定位将其他数据块定位在最短的一列的位置之后然后更新该列的高度。
+
+        //获取元素
+        var ullist = document.getElementById('ul-list');
+        var ali = ullist.getElementsByTagName("li");
+
+
+        //计算页面的宽度
+        var pageWidth = parseInt(document.documentElement.clientWidth || document.body.clientWidth);
+        //计算li的宽度
+        var aliWidth = ali[0].offsetWidth + ov;
+        //计算出页面可以放几列
+        var num = Math.floor(pageWidth / aliWidth);
+        ullist.style.width = aliWidth * num + "px";
+
+        //将第一行填满
+        var oarr = [];
+        for (var i = 0; i < num; i++) {
+            ali[i].style.top = 0+"px";
+            ali[i].style.left = aliWidth * i + "px";
+            oarr.push(ali[i].offsetHeight);
+        }
+        //摆放其他排
+        for (var j = num; j < ali.length; j++) {
+            //最低排的下标
+            var minSub = Minheight(oarr);
+            ali[j].style.left = aliWidth * minSub + "px";
+            ali[j].style.top = oarr[minSub] + ot + "px";
+            //更新最低列的下标
+            oarr[minSub] = oarr[minSub] + ot + ali[j].offsetHeight;
+        }
+        //求最低列的下标
+        function Minheight(arr) {
+            var key1 = arr[0];
+            var b = 0;
+            for (var i = 0; i < arr.length; i++) {
+                if (key1 > arr[i]) {
+                    key1 = arr[i];
+                    b = i;
+                }
+            }
+            return b;
+        }
+    }
+    window.onload = function () {
+        flow(10,10);
+        window.onscroll = function () {
+            var pageHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var ullist = document.getElementById('ul-list');
+            var ali = document.getElementsByTagName("li");
+            if ((pageHeight + scrollTop) > ali[ali.length - 1].offsetTop) {
+                //解析数据
+                for (var i in pics.data) {
+                    console.log(pics.data[i]);
+                    //创建元素
+                    var li = document.createElement("li");
+                    var img = document.createElement("img");
+                    img.src = "img/" + pics.data[i].src;
+                    var a = document.createElement("a");
+                    a.href = "#";
+                    a.innerHTML = pics.data[i].info + ali.length;
+                    li.appendChild(img);
+                    li.appendChild(a);
+                    ullist.appendChild(li);
+                }
+                flow(10,10);
+            }
+        };
+        window.onresize = function(){
+           flow(10,10);
+        }
+    };
+
+
+</script>
+</body>
+</html>

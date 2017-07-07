@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			ul{
+				list-style: none;
+				width: 500px;
+				height: 40px;
+				margin: 20px auto;
+			}
+			ul li{
+				float: left;
+				width: 100px;
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+				background-color: pink;
+				border: 1px solid purple;
+				box-sizing: border-box;
+				cursor: pointer;
+			}
+			#cont{
+				width: 500px;
+				height: 400px;
+				margin: 0 auto;
+				position: relative;
+			}
+			#cont > div{
+				position: absolute;
+				display : none;
+			}
+			
+			#cont > div img{
+				width: 500px;
+				height: 400px;
+			}
+			
+			.clearFix::after{
+				display: block;
+				content: "";
+				clear: both;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<ul class=clclearFix>
+			<li class="" data-qwe="0">荷花</li>
+			<li class="" data-qwe="1">柠檬</li>
+			<li class="" data-qwe="2">少司命</li>
+			<li class="" data-qwe="3">月儿</li>
+			<li class="" data-qwe="4">林依晨</li>
+		</ul>
+		
+		<div id="cont">
+			<div class="" style="display: block;"><img src="img/10.jpg" alt="" /></div>
+			<div><img src="img/17.jpg" alt="" /></div>
+			<div><img src="img/b1.jpg" alt="" /></div>
+			<div><img src="img/f10.jpeg" alt="" /></div>
+			<div><img src="img/l52.jpg" alt="" /></div>
+		</div>
+		
+		
+		<script>
+		//获取所有的li  
+		var oul = document.getElementsByTagName("ul")[0];
+		var oli = oul.getElementsByTagName("li");
+		//获取下面的div
+		var div = document.getElementById('cont');
+		var  odiv = div.getElementsByTagName("div");
+		/*//遍历上面的li    利用自定义属性
+		for(var i=0;i<oli.length;i++){
+			//滑上li时   下面对应的div显示
+			oli[i].onmouseover = function (){
+				//dataset.  自定义属性
+				var r = this.dataset.qwe;
+				//遍历下面的div
+				for(var j=0;j<odiv.length;j++){
+					//当序号与上面滑入li的序号相同时 显示
+					if(j == r){
+						odiv[r].style.display = "block";
+					} else{ //否则不显示
+						odiv[j].style.display = "none";
+					}
+				}
+				
+			}
+		}*/
+		
+		//利用事件委托  原理：事件冒泡     要触发事件的父级元素
+		oul.onclick = function(eve){
+			var e = eve || window.event;
+			//e.target || e.srcElement   触发事件的元素
+			var oli = e.target || e.srcElement;
+			//获取自定义属性的值  
+			var r = oli.dataset.qwe;
+			//判断触发事件的元素是否为li
+			if(oli.nodeName.toLowerCase() == "li"){
+				for(var i=0;i<odiv.length;i++){
+				if(i == r){
+					odiv[i].style.display = "block";
+				} else{
+					odiv[i].style.display = "none";
+				}
+			}
+			}
+			
+		};
+		
+		/*//利用闭包   循环一次就要创建两个函数  和 一个 变量 num  占用内存 耗时大 不建议用
+		for(var i =0;i<oli.length;i++){
+			oli[i].onmouseover = function(num){
+				return function fn(){
+					for(var j=0;j<odiv.length;j++){
+						if(j == num){
+							odiv[j].style.display = "block";
+						} else{
+							odiv[j].style.display = "none";
+						}
+					}
+				}
+			}(i)
+		}*/
+		
+		</script>
+	</body>
+</html>

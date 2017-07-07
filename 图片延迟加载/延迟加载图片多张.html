@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            height: 2000px;
+        }
+        div{
+            height: 1000px;
+        }
+        img{
+            width: 500px;
+            margin-top: 10px;
+            border: 1px solid pink;
+        }
+    </style>
+</head>
+<body>
+<div>撑开空间</div>
+<img src="img/1.jpg" _src="img/l1.jpg" alt=""/>
+<img src="img/2.jpg" _src="img/l2.jpg" alt=""/>
+<img src="img/3.jpg" _src="img/l3.jpg" alt=""/>
+<img src="img/4.jpg" _src="img/l4.jpg" alt=""/>
+<img src="img/5.jpg" _src="img/l5.jpg" alt=""/>
+<img src="img/6.jpg" _src="img/l6.jpg" alt=""/>
+<img src="img/7.jpg" _src="img/l7.jpg" alt=""/>
+<img src="img/8.jpg" _src="img/l8.jpeg" alt=""/>
+<img src="img/9.jpg" _src="img/l9.jpg" alt=""/>
+<img src="img/10.png" _src="img/l10.jpg" alt=""/>
+<img src="img/11.jpg" _src="img/l11.jpg" alt=""/>
+<img src="img/12.jpg" _src="img/l12.jpeg" alt=""/>
+<img src="img/13.jpg" _src="img/l13.jpg" alt=""/>
+<img src="img/14.jpg" _src="img/l14.jpg" alt=""/>
+<img src="img/15.jpeg" _src="img/l15.jpg" alt=""/>
+<img src="img/16.jpg" _src="img/l16.jpeg" alt=""/>
+<img src="img/17.jpg" _src="img/l17.gif" alt=""/>
+<img src="img/18.jpg" _src="img/l18.jpg" alt=""/>
+<img src="img/19.jpg" _src="img/l19.jpg" alt=""/>
+<img src="img/20.jpg" _src="img/l20.jpg" alt=""/>
+<img src="img/21.jpg" _src="img/l46.jpg" alt=""/>
+
+<script>
+    window.onload = function(){
+        var oImg = document.getElementsByTagName("img");
+        //获取图片距顶部的距离
+        var oTarget;
+        var loadingSrc = "img/loading.jpg";
+        window.onscroll = function(){
+            //获取可视区高度和滚动高度
+            var scrollT = document.documentElement.scrollTop || document.body.scrollTop;
+            var clientH = document.documentElement.clientHeight || document.body.clientHeight;
+            //判断是否到达目标位置
+            for(var i=0;i<oImg.length;i++){
+                oTarget = oImg[i].offsetTop + oImg[i].offsetHeight /2;
+                if(scrollT + clientH >= oTarget){
+                    if(!oImg[i].flag){
+                        oImg[i].src = loadingSrc;
+                        oImg[i].src = oImg[i].getAttribute("_src");
+                        oImg[i].flag = true;
+                    }
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>
